@@ -2,26 +2,54 @@ $(function(){
 
 	var ul = $('#progress ul');
 
-	$('#drop').show('slow');	// Where the image is droped
-	$('#progress').hide();		// Where the progress bar appears
-	$('#show-file-attached').hide();		// Where the image uploaded is shown
-	$('#show-file-options').hide();			// Where the options are shown
+	var iframe_name = window.name;
+	var image_object = iframe_name.replace("i_", "");
+	//alert(image_object);
+	var image_name_full = window.parent.$('#'+image_object).val();
+	var image_ext = image_name_full.split('.').pop();
+	var image_name = image_name_full.split('.').shift();
+	
+	// Example:
+	// We use the name of the iFrame to calculate the object containing the name of the file send
+	// To access to the object containing  the iframe there are two ways, the secure:
+		//alert(window.name);
+	// or the future one, must review with browsers
+		//var iframe_in_jquery = jQuery(window.frameElement, window.parent.document), id = iframe_in_jquery.attr("id");
+		//alert(id);
+
 	$('#drop #background').text(window.parent.file_drop);
 	$('#change_image').text(window.parent.change_image);
 	$('#delete_image').text(window.parent.delete_image);
+	
+	// Treatment if the record has an image
+	if( window.parent.$('#'+image_object).val() != '' ){
+		$('#drop').fadeOut();	// Where the image is droped
+		$('#progress').hide();		// Where the progress bar appears
+		
+		$('#show-file-attached').prepend('<img id="theImg" src="/ext/carum/carum/uploads/'+image_name+'_t.jpg" style="left:200px;" height="100px" width="100px" />');
+		//alert($('#theImg').attr('src));
+		$('#show-file-attached').show( "slow", function() {
+			//$('#progress').hide();		// Where the progress bar appears
+			$('#show-file-options').show( "slow");
+		});
+	}else{
+		$('#drop').show('slow');	// Where the image is droped
+		$('#progress').hide();		// Where the progress bar appears
+		$('#show-file-attached').hide();		// Where the image uploaded is shown
+		$('#show-file-options').hide();			// Where the options are shown
 
-	// Simulate a click on the file input button
-	// to show the file browser dialog
-	$('#drop a').click(function(){
-		$(this).parent().find('input').click();
-	});
-
-	// Action if change or delete image clicked
+		// Simulate a click on the file input button
+		// to show the file browser dialog
+		$('#drop a').click(function(){
+			$(this).parent().find('input').click();
+		});
+	}
+	// Action if change or delete image link clicked
 	$('#show-file-options span').click(function (e) {
 		e.preventDefault();
 		//alert($(this).attr('id'));
 		$('#theImg').remove();
-		window.parent.$('#image').val('');
+		window.parent.$('#'+image_object).val('');
 		$('#show-file-attached').hide();		// Where the image uploaded is shown
 		$('#show-file-options').hide();			// Where the options are shown
 		$('#drop').show('slow');	// Where the image is droped
@@ -85,14 +113,23 @@ $(function(){
 
 				if(status == 'success'){
 					//alert(new_file_name+'.'+ext_name);
-					$('#show-file-attached').prepend('<img id="theImg" src="/ext/carum/carum/uploads/'+new_file_name+'_tm.'+ext_name+'" style="left:200px;" />');
+					// WARNING: the thumbnail is a JPG file
+					//$('#show-file-attached').prepend('<img id="theImg" src="/ext/carum/carum/uploads/'+new_file_name+'_t.'+ext_name+'" style="left:200px;" />');
+					$('#show-file-attached').prepend('<img id="theImg" src="/ext/carum/carum/uploads/'+new_file_name+'_t.jpg" style="left:200px;" />');
 					$('#show-file-attached').show( "slow", function() {
 						$('#progress').hide();		// Where the progress bar appears
 						$('#show-file-options').show( "slow");
 					  });
 
 					//alert('Success '+data.files[0].name);
-					window.parent.$('#image').val(new_file_name+'.'+ext_name);
+					window.parent.$('#'+image_object).val(new_file_name+'.'+ext_name);
+					// Add the image to be removed from temp dir
+					var a = window.parent.$('#images_to_delete').val();
+					var b = a.split('|');
+					b.push(new_file_name+'.'+ext_name);
+					b.push(new_file_name+'_t.jpg');
+					var images_to_delete = b.join('|');
+					window.parent.$('#images_to_delete').val(images_to_delete);
 				}
 				
 				if(status == 'error'){
