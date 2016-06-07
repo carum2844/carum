@@ -1,0 +1,19 @@
+carum_carum_json_list_countries:
+    path: /json_list_countries/{country_id}
+    defaults: { _controller: carum.carum.includes.php.functionslocation:json_list_countries }
+    requirements:
+        country_id: \d+
+
+carum_carum_json_list_states:
+    path: /json_list_states/{country_id}/{state_id}
+    defaults: { _controller: carum.carum.includes.php.functionslocation:json_list_states }
+    requirements:
+        country_id: \d+
+        state_id: \d+
+
+carum_carum_json_list_cities:
+    path: /json_list_cities/{country_id}/{state_id}/{city_id}
+    defaults: { _controller: carum.carum.includes.php.functionslocation:json_list_cities }
+    requirements:
+        country_id: \d+
+        state_id: \d+

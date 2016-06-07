@@ -1,0 +1,8 @@
+services:
+    carum.carum.includes.php.functionslocation:
+        class: carum\carum\includes\php\functionslocation
+        arguments:
+            - '@cache'
+            - '@dbal.conn'
+            - '@user'
+            - '%core.table_prefix%' 
