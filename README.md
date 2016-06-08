@@ -11,6 +11,7 @@ Build Status Being developped
 Clone (or download and move) the repository into the folder ext/carum/carum:
 
 cd where_your_phpbb31_resides
+
 git clone https://github.com/carum/carum.git ext/carum/carum/
 
 # Activate instructions
