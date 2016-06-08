@@ -1,25 +1,25 @@
 # carum
-Carum
 
 phpBB 3.1 Carum extension
 
 Extension will give service to my other extensions.
 
-Build Status
-Installation
+Build Status Being developped
+
 1. clone
 
 Clone (or download and move) the repository into the folder ext/carum/carum:
 
-cd phpBB3
+cd [where your phpbb resides]
 git clone https://github.com/carum/carum.git ext/carum/carum/
 
 2. activate
 
-Go to admin panel -> tab customise -> Manage extensions -> enable Stop Forum Spam
+Go to admin panel -> tab customise -> Manage extensions -> enable Carum
 
-Within the Admin panel visit the Extensions tab and within choose the settings for the extension.
-Update instructions:
+There is nothing to enable within the Admin panel.
+
+3. Update instructions:
 
     Go to your phpBB-Board > Admin Control Panel > Customise > Manage extensions > carum: disable
     Delete all files of the extension from ext/carum/carum
