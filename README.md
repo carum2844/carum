@@ -6,7 +6,7 @@ Extension will give service to my other extensions.
 
 Build Status Being developped
 
-Clone instructions
+# Clone instructions
 
 Clone (or download and move) the repository into the folder ext/carum/carum:
 
