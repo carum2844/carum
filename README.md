@@ -13,13 +13,13 @@ Clone (or download and move) the repository into the folder ext/carum/carum:
 cd [where your phpbb resides]
 git clone https://github.com/carum/carum.git ext/carum/carum/
 
-Activate instructions
+# Activate instructions
 
 Go to admin panel -> tab customise -> Manage extensions -> enable Carum
 
 There is nothing to enable within the Admin panel.
 
-Update instructions:
+# Update instructions
 
     Go to your phpBB-Board > Admin Control Panel > Customise > Manage extensions > carum: disable
     Delete all files of the extension from ext/carum/carum
